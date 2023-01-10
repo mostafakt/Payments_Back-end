@@ -9,6 +9,8 @@ urlpatterns = [
     path('salary/', FBV_List),
     path('salary/<int:id>/', FBV_Id),
     path('paid/', PAIDS_List),
+
+
     path('paid/<int:id>/', PAID_Id),
 
 ]
@@ -17,3 +19,4 @@ router = DefaultRouter()
 router.register(r'users', UserVeiwSet, basename='user')
 urlpatterns += router.urls
 logging.warning(router.get_routes)
+ 
