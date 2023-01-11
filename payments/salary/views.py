@@ -23,7 +23,7 @@ def all_sallry(req):
 @api_view(['GET', 'POST'])
 def FBV_List(request):
     if (request.method == 'GET'):
-        Salaries = Salary.objects.all()
+        Salaries = Salary.objects.prefetch_related('paids')
         ser = SalarySerilizer(Salaries, many=True)
         return Response(ser.data)
     else:

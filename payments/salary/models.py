@@ -25,7 +25,8 @@ class paid(models.Model):
     # id = models.IntegerField(primary_key=True)
     name = models.TextField()
     paidAmount = models.IntegerField()
-    salary = models.ForeignKey(Salary, on_delete=models.CASCADE)
+    salary = models.ForeignKey(
+        Salary, on_delete=models.CASCADE, related_name='paids')
     date = models.DateField()
 
     class Meta:

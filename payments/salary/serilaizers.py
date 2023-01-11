@@ -1,12 +1,7 @@
+import logging
 from rest_framework import serializers
 from .models import paid, Salary
 from django.contrib.auth import get_user_model
-
-
-class SalarySerilizer(serializers.ModelSerializer):
-    class Meta:
-        model = Salary
-        fields = '__all__'
 
 
 class UserSerilizer(serializers.ModelSerializer):
@@ -16,6 +11,7 @@ class UserSerilizer(serializers.ModelSerializer):
 
 
 class PaidSerilizer(serializers.ModelSerializer):
+
     class Meta:
         model = paid
         fields = '__all__'
@@ -34,3 +30,11 @@ class PaidSerilizer(serializers.ModelSerializer):
         class CustomSerializer(cls):
             salary = SalarySerilizer(write_only=True)
         return CustomSerializer()
+
+
+class SalarySerilizer(serializers.ModelSerializer):
+    paids = PaidSerilizer(many=True)
+
+    class Meta:
+        model = Salary
+        fields = '__all__'
