@@ -1,3 +1,4 @@
+import logging
 from django.shortcuts import render
 from django.http.response import JsonResponse
 from rest_framework.decorators import api_view
@@ -30,8 +31,12 @@ def FBV_List(request):
         if (request.method == 'POST'):
             ser = SalarySerilizer(data=request.data)
             if ser.is_valid():
+                logging.warning("||||||||||||||||||||||" +
+                                str(ser.errors)+"|||||||||||||||||||||||||||")
                 ser.save()
                 return Response(ser.data, status=status.HTTP_201_CREATED)
+            logging.warning("||||||||||||||||||||||" +
+                            str(ser.errors)+"|||||||||||||||||||||||||||")
             return Response(ser.data, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -72,8 +77,12 @@ def PAIDS_List(request):
             salary.save()
 
             ser = PaidSerilizer(data=request.data)
+
             if ser.is_valid():
                 ser.save()
+                logging.warning("|||||||||||||||||||||||||" +
+                                str(ser.errors)+"|||||||||||||||||||||||||")
+
                 return Response(ser.data, status=status.HTTP_201_CREATED)
             return Response(ser.data, status=status.HTTP_400_BAD_REQUEST)
 

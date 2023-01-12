@@ -33,8 +33,10 @@ class PaidSerilizer(serializers.ModelSerializer):
 
 
 class SalarySerilizer(serializers.ModelSerializer):
-    paids = PaidSerilizer(many=True)
+    paids = PaidSerilizer(many=True, read_only=True)
 
     class Meta:
         model = Salary
-        fields = '__all__'
+        # write_only_fields = ('paids',)
+        fields = ('id', 'name', 'salaryAmount',
+                  'currsalaryAmount',  'date', 'paids')
